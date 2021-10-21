@@ -1,5 +1,7 @@
 
 @import './pokedex.css';
+@import './cover.css';
+
 
 :root { 
   --black: #300f16; 

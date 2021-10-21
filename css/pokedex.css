@@ -4,10 +4,22 @@
     inline-size: 100%;
     /* border: 1px solid red; */
     outline: none;
+    position: relative;
+    perspective: 1000px;
+}
+
+.pokedex:is(:hover, :focus, :focus-within) .cover-front{
+    border: 1px solid red;
+    transform: rotateY(180deg);
+}
+
+.pokedex:is(:hover, :focus, :focus-within) .cover-back{
+    border: 1px solid red;
+    transform: rotateY(0);
 }
 
 .pokedex-main{
-    background-color: red;
+    background-color: var(--primary);
     block-size: inherit;
     border-radius: .5rem .5rem 0 .5rem;
     box-sizing: border-box;
