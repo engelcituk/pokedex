@@ -10,6 +10,12 @@ function setDescription( description ) {
     $description.textContent = description
 }
 
+const $screen = document.querySelector('#screen')
+function loader( isLoading = false ) {
+    const img = isLoading ? 'url(./images/loading.gif)' : ''
+    $screen.style.backgroundImage = img
+}
+
 export async function findPokemon(id) {
     const pokemon = await getPokemon( id )
     const species = await getSpecies( id )
@@ -22,7 +28,11 @@ export async function findPokemon(id) {
 }
 
 export async function setPokemon( id ) {
+    //loader start
+    loader( true )
     const { sprites, description} = await findPokemon( id )
+    //loader end
+    loader( false )
     setImage( sprites )
     setDescription( description )
 }
