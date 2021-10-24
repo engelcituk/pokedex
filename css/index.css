@@ -3,8 +3,7 @@
 @import './cover.css';
 @import './header.css';
 @import './lights.css';
-
-
+@import './stats.css';
 
 :root { 
   --black: #300f16; 
