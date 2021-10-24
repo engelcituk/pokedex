@@ -4,6 +4,7 @@
 @import './header.css';
 @import './lights.css';
 @import './stats.css';
+@import './screen.css';
 
 :root { 
   --black: #300f16; 
