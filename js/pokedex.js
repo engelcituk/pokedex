@@ -20,10 +20,20 @@ export async function findPokemon( idPokemon ) {
     const pokemon = await getPokemon( idPokemon  )
     const species = await getSpecies( idPokemon  )
     const description = species.flavor_text_entries.find( (flavor) => flavor.language.name === 'es' )
+
+    const sprites = []
+    for( const item in pokemon.sprites ) {
+        if( pokemon.sprites[item] && item !== 'other' && item !== 'versions' ){
+            sprites.push( pokemon.sprites[item] ) 
+        }
+    }
+    console.log(sprites)
+
     return {
         description: description.flavor_text,
-        sprites: pokemon.sprites.front_default,
-        id: pokemon.id
+        id: pokemon.id,
+        spriteDefault: pokemon.sprites.front_default,
+        sprites
     }
      
 }
@@ -31,10 +41,10 @@ export async function findPokemon( idPokemon ) {
 export async function setPokemon( idPokemon ) {
     //loader start
     loader( true )
-    const { id, sprites, description } = await findPokemon( idPokemon )
+    const { id, spriteDefault, description, sprites } = await findPokemon( idPokemon )
     //loader end
     loader( false )
-    setImage( sprites )
+    setImage( spriteDefault )
     setDescription( description )
-    return { id, sprites, description }
+    return { id, spriteDefault, description, sprites}
 }
