@@ -16,23 +16,25 @@ function loader( isLoading = false ) {
     $screen.style.backgroundImage = img
 }
 
-export async function findPokemon(id) {
-    const pokemon = await getPokemon( id )
-    const species = await getSpecies( id )
+export async function findPokemon( idPokemon ) {
+    const pokemon = await getPokemon( idPokemon  )
+    const species = await getSpecies( idPokemon  )
     const description = species.flavor_text_entries.find( (flavor) => flavor.language.name === 'es' )
     return {
         description: description.flavor_text,
-        sprites: pokemon.sprites.front_default 
+        sprites: pokemon.sprites.front_default,
+        id: pokemon.id
     }
      
 }
 
-export async function setPokemon( id ) {
+export async function setPokemon( idPokemon ) {
     //loader start
     loader( true )
-    const { sprites, description} = await findPokemon( id )
+    const { id, sprites, description } = await findPokemon( idPokemon )
     //loader end
     loader( false )
     setImage( sprites )
     setDescription( description )
+    return { id, sprites, description }
 }
