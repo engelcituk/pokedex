@@ -5,6 +5,12 @@
 @import './lights.css';
 @import './stats.css';
 @import './screen.css';
+@import './actions.css';
+@import './description.css';
+@import './navigation.css';
+@import './search.css';
+@import './variants.css';
+
 
 :root { 
   --black: #300f16; 
