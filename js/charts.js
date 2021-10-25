@@ -33,7 +33,7 @@ export function createChart( stats ) {
                         color: 'white'
                     },
                     pointLabels:{
-                        color: 'transparent'
+                        color: 'white'
                     },
                     angleLines:{
                         color: 'white'
