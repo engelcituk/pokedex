@@ -1,38 +1,45 @@
 const ctx = document.getElementById('stats').getContext('2d');
 
-const data = {
-    labels: [
-      'Eating',
-      'Drinking',
-      'Sleeping',
-      'Designing',
-      'Coding',
-      'Cycling',
-      'Running'
-    ],
-    datasets: [{
-      label: 'My First Dataset',
-      data: [65, 59, 90, 81, 56, 55, 40],
-      fill: true,
-      backgroundColor: 'rgba(255, 99, 132, 0.2)',
-      borderColor: 'rgb(255, 99, 132)',
-      pointBackgroundColor: 'rgb(255, 99, 132)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgb(255, 99, 132)'
-    }, {
-      label: 'My Second Dataset',
-      data: [28, 48, 40, 19, 96, 27, 100],
-      fill: true,
-      backgroundColor: 'rgba(54, 162, 235, 0.2)',
-      borderColor: 'rgb(54, 162, 235)',
-      pointBackgroundColor: 'rgb(54, 162, 235)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgb(54, 162, 235)'
-    }]
+export function createChart( stats ) {
+    return new Chart(ctx, {
+        type: 'radar',
+        data:{
+            labels: [
+                ['Vida', 'HP'],
+                ['Ataque', 'Attack'],
+                ['Defensa', 'Defense'],
+                ['Ataque Especial','Special attack'],
+                ['Defensa Especial', 'Special Defense'],
+                ['Velocidad', 'speed'],      
+            ],
+            datasets:[
+                {
+                    label: 'Estadisticas del pokémon',
+                    data: stats,
+                    backgroundColor: 'white'
+                }
+            ]
+        },
+        options:{
+            maintainAspectRatio: false,
+            plugins:{
+                legend:{
+                    display: false
+                }
+            },
+            scales:{
+                r:{
+                    grid:{
+                        color: 'white'
+                    },
+                    pointLabels:{
+                        color: 'transparent'
+                    },
+                    angleLines:{
+                        color: 'white'
+                    }
+                }
+            }
+        }
+    })
 }
-const myChart = new Chart(ctx, {
-    type: 'radar',
-    data,
-})
