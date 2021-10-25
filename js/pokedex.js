@@ -17,6 +17,17 @@ function loader( isLoading = false ) {
     $screen.style.backgroundImage = img
 }
 
+const $ligthBig = document.querySelector('#ligthBig')
+function speech( text ) {
+    const utterance = new SpeechSynthesisUtterance( text )
+    utterance.lang = 'es'
+    speechSynthesis.speak(utterance)
+    $ligthBig.classList.add('is-animated')
+
+    utterance.addEventListener('end', ()=>{
+        $ligthBig.classList.remove('is-animated')
+    })
+}
 export async function findPokemon( idPokemon ) {
     const pokemon = await getPokemon( idPokemon  )
     const species = await getSpecies( idPokemon  )
@@ -32,8 +43,8 @@ export async function findPokemon( idPokemon ) {
     return {
         description: description.flavor_text,
         id: pokemon.id,
-        // spriteDefault: pokemon.sprites.front_default,
-        sprites
+        name:pokemon.name,
+        sprites,
     }
      
 }
@@ -41,10 +52,11 @@ export async function findPokemon( idPokemon ) {
 export async function setPokemon( idPokemon ) {
     //loader start
     loader( true )
-    const { id, description, sprites } = await findPokemon( idPokemon )
+    const { id, description, sprites, name } = await findPokemon( idPokemon )
     //loader end
     loader( false )
     setImage( sprites[0] )
     setDescription( description )
-    return { id, description, sprites}
+    speech( `${name}: ${description}` )
+    return { id, description, sprites, name}
 }
